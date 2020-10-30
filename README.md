@@ -1,13 +1,12 @@
-# EC601 Project 2
+# EC601 Project 4
 
 Shashank Manjunath  
 manjuns@bu.edu  
 
 ## Introduction
 
-This project tests out the Twitter API and the Google NLP API. In Part 1 of this project, we will create some simple
-scripts to utilize some of the Twitter and Google NLP API functionality.
-
+This project involves implementing tests for the software developed in Project 2. We will write unit tests for the
+components included in this project.
 
 ## Dependencies
 
@@ -101,5 +100,6 @@ Score: -0.050   Magnitude: 0.050
 This team has a Neutral sentiment.
 ```
 
+## Running the Tests
 
 

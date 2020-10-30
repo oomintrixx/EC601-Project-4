@@ -4,6 +4,10 @@ import numpy as np
 import os
 
 
+def average(target_list):
+    return sum(target_list) / len(target_list)
+
+
 class SentimentContainer:
     """ Container which holds magnitude and score of multiple Google Cloud API Sentiment Returns """
     def __init__(self):
