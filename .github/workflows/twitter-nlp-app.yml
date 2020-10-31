@@ -5,9 +5,13 @@ name: EC601-Project-4
 
 on:
   push:
-    branches: [ master ]
+    branches:
+        - master
+        - staging
   pull_request:
-    branches: [ master ]
+    branches:
+        - master
+        - staging
 
 jobs:
   build:
@@ -20,6 +24,9 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.6
+        twitter-api-config: ${{ secrets.CONFIG_FILE }}
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS: $${ secrets.CLOUD_NATURAL_LANGUAGE_API }
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
