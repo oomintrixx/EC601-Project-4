@@ -41,5 +41,5 @@ jobs:
         TWITTER_API_CONFIG: ${{ secrets.CONFIG_FILE }}
         GOOGLE_APPLICATION_CREDENTIALS: $${ secrets.CLOUD_NATURAL_LANGUAGE_API }
       run: |
-        echo "$TWITTER_API_CONFIG"" >> config_private.ini
+        echo "$TWITTER_API_CONFIG" >> config_private.ini
         pytest
