@@ -21,6 +21,9 @@ class Tweets(object):
         access_token = self.config["twitter"]["access_token"]
         access_token_secret = self.config["twitter"]["access_token_secret"]
 
+        if len(consumer_key) == 0 or len(consumer_key_secret) == 0 or len(access_token) == 0 or len(access_token_secret) == 0:
+            raise RuntimeError("Length of a key is zero - check your config file!")
+
         auth = tweepy.OAuthHandler(consumer_key, consumer_key_secret)
         auth.set_access_token(access_token, access_token_secret)
 
@@ -47,6 +50,9 @@ class Tweets(object):
         # minimum tweets to pull, we repeatedly pull tweets until we have the desired number.
 
         # Ensuring that we are not pulling more than the total number of tweets that a user has tweeted
+        if num_tweets == 0:
+            return []
+
         if tweets_to_pull > user.statuses_count:
             tweets_to_pull = user.statuses_count
             num_tweets = user.statuses_count
