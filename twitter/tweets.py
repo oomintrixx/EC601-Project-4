@@ -47,6 +47,9 @@ class Tweets(object):
         # minimum tweets to pull, we repeatedly pull tweets until we have the desired number.
 
         # Ensuring that we are not pulling more than the total number of tweets that a user has tweeted
+        if num_tweets == 0:
+            return []
+
         if tweets_to_pull > user.statuses_count:
             tweets_to_pull = user.statuses_count
             num_tweets = user.statuses_count
