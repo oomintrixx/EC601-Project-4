@@ -5,7 +5,7 @@ import os
 
 
 class TestTwitterAPIBase:
-    t = Tweets(os.environ.get("TWITTER_API_CONFIG"))
+    t = Tweets("config_private.ini")
 
 class TestConfigLoading:
     """ Tests config file loading  """
