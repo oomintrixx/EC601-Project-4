@@ -21,6 +21,9 @@ class Tweets(object):
         access_token = self.config["twitter"]["access_token"]
         access_token_secret = self.config["twitter"]["access_token_secret"]
 
+        if len(consumer_key) == 0 or len(consumer_key_secret) == 0 or len(access_token) == 0 or len(access_token_secret) == 0:
+            raise RuntimeError("Length of a key is zero - check your config file!")
+
         auth = tweepy.OAuthHandler(consumer_key, consumer_key_secret)
         auth.set_access_token(access_token, access_token_secret)
 
