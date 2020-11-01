@@ -39,7 +39,8 @@ jobs:
     - name: Test with pytest
       env:
         TWITTER_API_CONFIG: ${{ secrets.CONFIG_FILE }}
-        GOOGLE_APPLICATION_CREDENTIALS: $${ secrets.CLOUD_NATURAL_LANGUAGE_API }
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.CLOUD_NATURAL_LANGUAGE_API }}
       run: |
         echo "$TWITTER_API_CONFIG" >> config_private.ini
+        echo "$GOOGLE_APPLICATION_CREDENTIALS" >> cloud_natural_language_api.json
         pytest
