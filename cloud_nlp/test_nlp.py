@@ -12,6 +12,16 @@ class FakeSentiment(object):
 class TestGoogleNLPAPIBase(object):
     t = SentimentAnalyzer("cloud_natural_language_api.json")
 
+    @staticmethod
+    def convert_sentiment_to_dict(s):
+        return {"score": s.score, "magnitude": s.magnitude}
+
+    @staticmethod
+    def convert_entity_sentiment_to_dict(s):
+        if len(s.entities) > 1:
+            raise RuntimeError("Too many entities returned by NLP API!")
+        return {"score": s.entities[0].sentiment.score, "magnitude": s.entities[0].sentiment.magnitude}
+
 
 class TestSentimentContainer:
     def test_add(self):
@@ -78,24 +88,31 @@ class TestConfigLoading:
 class TestSentimentAnalyzer(TestGoogleNLPAPIBase):
     def test_analyze_text_positive(self):
         pos_text = "That was awesome!"
-        pass
+        sentiment = self.convert_sentiment_to_dict(self.t.analyze_text(pos_text))
+        assert self.t.get_semantic_sentiment(sentiment) == "Clearly Positive" or self.t.get_semantic_sentiment == "Positive"
 
     def test_analyze_text_negative(self):
         neg_text = "That was horrible."
-        pass
+        sentiment = self.convert_sentiment_to_dict(self.t.analyze_text(neg_text))
+        assert self.t.get_semantic_sentiment(sentiment) == "Clearly Negative" or self.t.get_semantic_sentiment == "Negative"
 
     def test_analyze_text_neutral(self):
-        neutral_text = "That was okay."
-        pass
+        neutral_text = ""
+        sentiment = self.convert_sentiment_to_dict(self.t.analyze_text(neutral_text))
+        assert self.t.get_semantic_sentiment(sentiment) == "Neutral"
 
     def test_analyze_entities_positive(self):
         pos_text = "Joe is great!"
-        pass
+        sentiment = self.convert_entity_sentiment_to_dict(self.t.analyze_entities(pos_text))
+        assert self.t.get_semantic_sentiment(sentiment) == "Clearly Positive" or self.t.get_semantic_sentiment == "Positive"
 
     def test_analyze_entities_negative(self):
         neg_text = "Joe is a bad person."
-        pass
+        sentiment = self.convert_entity_sentiment_to_dict(self.t.analyze_entities(neg_text))
+        assert self.t.get_semantic_sentiment(sentiment) == "Clearly Negative" or self.t.get_semantic_sentiment == "Negative"
 
     def test_analyze_entities_neutral(self):
-        neg_text = "Joe is okay."
-        pass
+        neutral_text = "Joe"
+        sentiment = self.convert_entity_sentiment_to_dict(self.t.analyze_entities(neutral_text))
+        assert self.t.get_semantic_sentiment(sentiment) == "Neutral"
+
