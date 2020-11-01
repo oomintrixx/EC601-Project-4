@@ -103,8 +103,8 @@ This team has a Neutral sentiment.
 ## Running the Tests
 
 This repository is set up with Github actions to automatically build and test the code upon push or pull request to the
-master or staging branch. Code cannot be pushed directly to master or staging, but rather requires a pull request to be
-approved before merge.
+master or staging branch. Code cannot be pushed directly to master or staging (unless you are a repository
+administrator), but rather requires a pull request to be approved before merge.
 
-Tests are included in the `tests` subdirectories. To run the tests, run `pytest`.
+Tests are included in the corresponding subdirectories. To run the tests, run `pytest`.
 
